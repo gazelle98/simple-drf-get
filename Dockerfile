@@ -1,12 +1,10 @@
-FROM python:3.8.3-alpine
+FROM python:3
 
-WORKDIR hamrah_academy/summation
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-RUN pip install --upgrade pip
-COPY ./requirements.txt .
+RUN mkdir /summation
+WORKDIR /summation
+COPY requirements.txt /summation/
 RUN pip install -r requirements.txt
+COPY . /summation/
 
-COPY . .
+EXPOSE 8000
+CMD python manage.py runserver 127.0.0.1:8000
